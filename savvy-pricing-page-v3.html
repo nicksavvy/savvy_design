@@ -319,7 +319,7 @@
 
   /* ===== HOW IT WORKS ===== */
   .how-it-works {
-    background: var(--white);
+    background: var(--soft-white);
     padding: 88px 48px;
   }
   .hiw-top { text-align: center; margin-bottom: 56px; }
@@ -643,8 +643,7 @@
       max-width: 480px;
       gap: 16px;
     }
-    /* Reorder: recommended card first on mobile */
-    .p-card.recommended { order: -1; }
+    /* Keep natural order: Free → Boost → Boost Plus → Boost Max */
     .p-card { border-radius: 16px; }
     .p-card:hover { transform: none; box-shadow: none; }
     .p-card.recommended:hover { transform: none; }
@@ -674,13 +673,11 @@
     .hiw-track {
       flex-direction: column;
       align-items: center;
-      gap: 32px;
+      gap: 28px;
     }
     .hiw-track::before {
-      /* Vertical connector line */
-      top: 0; bottom: 0;
-      left: 50%; right: auto;
-      width: 2px; height: 100%;
+      /* Hide connector line on mobile - circles provide visual flow */
+      display: none;
     }
     .hiw-step {
       max-width: 320px;
@@ -773,7 +770,46 @@
 </section>
 
 <!-- ═══════════════════════════════════════════
-     3. PRICING  - the main event, shown early
+     WHY BOOST + USE CASES  - two-column
+     ═══════════════════════════════════════════ -->
+<section class="why-boost">
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label">Why boost</div>
+      <h2 class="section-heading">When travelers search, be impossible to&nbsp;miss.</h2>
+      <p class="section-subheading">Every day, travelers are searching for properties in your market. Boosted listings make sure yours are the ones they see first, turning searches into stays.</p>
+      <div class="why-cta-row">
+        <a href="#pricing" class="btn-sunrise">Boost your listings</a>
+        <a href="#how" class="btn-outline-light">See how it works</a>
+      </div>
+    </div>
+    <div class="use-case-grid">
+      <div class="uc-mini">
+        <div class="uc-mini-icon">🚀</div>
+        <h4>New launches</h4>
+        <p>Maximum visibility when you need it the most.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">⚡</div>
+        <h4>Competitive markets</h4>
+        <p>Stand out when multiple properties compete for the same search.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">📅</div>
+        <h4>Slower seasons</h4>
+        <p>Fill gaps during your market's off-peak months.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">💎</div>
+        <h4>High-value properties</h4>
+        <p>When one extra booking more than covers the cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     PRICING
      ═══════════════════════════════════════════ -->
 <section class="pricing" id="pricing">
   <div class="pricing-top">
@@ -893,45 +929,6 @@
 
   </div>
   <p class="pricing-note">All plans are per listing, billed monthly. No long-term contracts. Adjust or cancel anytime.</p>
-</section>
-
-<!-- ═══════════════════════════════════════════
-     4. WHY BOOST + USE CASES  - two-column
-     ═══════════════════════════════════════════ -->
-<section class="why-boost">
-  <div class="why-inner">
-    <div class="why-left">
-      <div class="section-label">Why boost</div>
-      <h2 class="section-heading">When travelers search, be impossible to&nbsp;miss.</h2>
-      <p class="section-subheading">Every day, travelers are searching for properties in your market. Boosted listings make sure yours are the ones they see first, turning searches into stays.</p>
-      <div class="why-cta-row">
-        <a href="#pricing" class="btn-sunrise">Boost your listings</a>
-        <a href="#how" class="btn-outline-light">See how it works</a>
-      </div>
-    </div>
-    <div class="use-case-grid">
-      <div class="uc-mini">
-        <div class="uc-mini-icon">🚀</div>
-        <h4>New launches</h4>
-        <p>Maximum visibility when you need it the most.</p>
-      </div>
-      <div class="uc-mini">
-        <div class="uc-mini-icon">⚡</div>
-        <h4>Competitive markets</h4>
-        <p>Stand out when multiple properties compete for the same search.</p>
-      </div>
-      <div class="uc-mini">
-        <div class="uc-mini-icon">📅</div>
-        <h4>Slower seasons</h4>
-        <p>Fill gaps during your market's off-peak months.</p>
-      </div>
-      <div class="uc-mini">
-        <div class="uc-mini-icon">💎</div>
-        <h4>High-value properties</h4>
-        <p>When one extra booking more than covers the cost.</p>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- ═══════════════════════════════════════════
