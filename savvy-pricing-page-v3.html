@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Savvy - Boosted Listings</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  :root {
+    --savvy-blue: #1D414C;
+    --savvy-blue-90: rgba(29,65,76,0.90);
+    --pool: #C3E2DB;
+    --pool-500: #98ccc0;
+    --pool-dark: #3d6774;
+    --soft-white: #F4F1E9;
+    --sunrise: #FCB22D;
+    --sunrise-dark: #E59603;
+    --sunrise-light: #FDD996;
+    --white: #FFFFFF;
+    --fog: #eff0ed;
+    --gray-main: #6d6d61;
+    --gray-light: #d7d8d3;
+    --font: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font);
+    color: var(--savvy-blue);
+    background: var(--white);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== NAV ===== */
+  .nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px; height: 72px;
+    background: rgba(255,255,255,0.92);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(29,65,76,0.06);
+  }
+  .nav-logo { font-weight: 700; font-size: 26px; letter-spacing: -0.5px; }
+  .nav-logo span { font-weight: 300; font-size: 13px; display: block; letter-spacing: 0.4px; margin-top: -2px; opacity: 0.7; }
+  .nav-right { display: flex; align-items: center; gap: 24px; }
+  .nav-link { font-size: 15px; font-weight: 500; color: var(--savvy-blue); text-decoration: none; opacity: 0.8; }
+  .nav-link:hover { opacity: 1; }
+  .nav-icons { display: flex; gap: 12px; }
+  .nav-icon {
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1.5px solid rgba(29,65,76,0.2);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px; cursor: pointer; transition: border-color 0.2s;
+  }
+  .nav-icon:hover { border-color: var(--savvy-blue); }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    min-height: 520px;
+    background: linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.15) 45%, rgba(0,0,0,0.45) 100%),
+                url('https://www.figma.com/api/mcp/asset/441675b2-c947-4a1f-b447-1bee38e23f2d') center 40%/cover no-repeat;
+    display: flex; align-items: flex-end;
+    padding: 0 0 0 0;
+    margin-top: 72px;
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    padding: 0 64px 56px;
+    max-width: 860px;
+    color: var(--white);
+  }
+  .hero h1 {
+    font-size: 56px; font-weight: 600;
+    line-height: 1.12; letter-spacing: -1.5px;
+    margin-bottom: 16px;
+  }
+  .hero p {
+    font-size: 20px; font-weight: 400;
+    line-height: 1.55; opacity: 0.92;
+    max-width: 620px;
+  }
+
+  /* ===== STATS RIBBON ===== */
+  .stats-ribbon {
+    background: var(--savvy-blue);
+    display: flex; align-items: center; justify-content: center;
+    gap: 0; padding: 0;
+  }
+  .stat-item {
+    flex: 1; text-align: center;
+    padding: 32px 24px;
+    border-right: 1px solid rgba(255,255,255,0.08);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-number {
+    font-size: 40px; font-weight: 700;
+    color: var(--sunrise);
+    line-height: 1; margin-bottom: 6px;
+    letter-spacing: -1px;
+  }
+  .stat-label {
+    font-size: 14px; font-weight: 500;
+    color: rgba(255,255,255,0.7);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== SECTION UTILITY ===== */
+  .section-label {
+    font-size: 13px; font-weight: 600;
+    letter-spacing: 1.5px; text-transform: uppercase;
+    margin-bottom: 12px; opacity: 0.5;
+  }
+  .section-heading {
+    font-size: 40px; font-weight: 600;
+    line-height: 1.2; letter-spacing: -0.5px;
+  }
+  .section-subheading {
+    font-size: 18px; font-weight: 400;
+    line-height: 1.6; opacity: 0.75;
+    max-width: 560px;
+  }
+
+  /* ===== PRICING ===== */
+  .pricing {
+    padding: 80px 48px 88px;
+    background: var(--white);
+  }
+  .pricing-top {
+    text-align: center; margin-bottom: 56px;
+  }
+  .pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    max-width: 1180px; margin: 0 auto;
+    align-items: stretch;
+  }
+  .p-card {
+    border-radius: 20px;
+    border: 2px solid var(--fog);
+    display: flex; flex-direction: column;
+    position: relative;
+    background: var(--white);
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+    overflow: visible;
+  }
+  .p-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 20px 48px rgba(29,65,76,0.08);
+  }
+  .p-card.recommended {
+    border-color: var(--sunrise);
+    box-shadow: 0 8px 40px rgba(252,178,45,0.15);
+    transform: scale(1.03);
+    z-index: 2;
+  }
+  .p-card.recommended:hover {
+    transform: scale(1.03) translateY(-6px);
+    box-shadow: 0 24px 56px rgba(252,178,45,0.20);
+  }
+  .p-badge {
+    position: absolute; top: 0; left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--sunrise);
+    color: var(--savvy-blue);
+    font-size: 13px; font-weight: 700;
+    padding: 5px 18px;
+    border-radius: 50px;
+    white-space: nowrap;
+    letter-spacing: 0.2px;
+  }
+  .p-header {
+    padding: 28px 24px 20px;
+    border-bottom: 1px solid var(--fog);
+  }
+  .p-card.recommended .p-header {
+    background: linear-gradient(180deg, rgba(252,178,45,0.08) 0%, transparent 100%);
+  }
+  .p-tier {
+    font-size: 20px; font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .p-price-row {
+    display: flex; align-items: baseline; gap: 8px;
+    margin-bottom: 4px;
+  }
+  .p-price {
+    font-size: 32px; font-weight: 700;
+    letter-spacing: -1px;
+  }
+  .p-period {
+    font-size: 13px; font-weight: 400;
+    opacity: 0.5;
+  }
+  .p-daily {
+    margin-top: 6px;
+    font-size: 13px; font-weight: 500;
+    color: var(--savvy-blue); opacity: 0.55;
+  }
+
+  .p-body {
+    padding: 24px;
+    flex: 1;
+  }
+  .p-exposure {
+    display: flex; align-items: center; gap: 10px;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: var(--soft-white);
+    border-radius: 10px;
+  }
+  .p-exposure-multiplier {
+    font-size: 22px; font-weight: 700;
+    color: var(--savvy-blue);
+  }
+  .p-card.recommended .p-exposure {
+    background: rgba(252,178,45,0.10);
+  }
+  .p-exposure-label {
+    font-size: 13px; font-weight: 500;
+    opacity: 0.65; line-height: 1.3;
+  }
+  .p-features { list-style: none; }
+  .p-features li {
+    font-size: 15px; font-weight: 400;
+    line-height: 1.5;
+    padding: 5px 0 5px 24px;
+    position: relative;
+    opacity: 0.8;
+  }
+  .p-features li::before {
+    content: '✓'; position: absolute;
+    left: 0; font-weight: 600;
+    color: var(--pool-500);
+  }
+  .p-best-for {
+    padding: 0 24px 12px;
+    font-size: 13px; line-height: 1.5;
+    opacity: 0.6;
+  }
+  .p-best-for strong { font-weight: 600; opacity: 1; }
+  .p-footer { padding: 0 24px 24px; }
+  .p-btn {
+    display: block; width: 100%;
+    padding: 13px 20px;
+    border-radius: 50px;
+    font-size: 15px; font-weight: 600;
+    text-align: center; cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s;
+    border: 2px solid var(--savvy-blue);
+    background: transparent; color: var(--savvy-blue);
+  }
+  .p-btn:hover { background: var(--savvy-blue); color: var(--white); }
+  .p-btn-primary {
+    background: var(--sunrise);
+    border-color: var(--sunrise);
+    color: var(--savvy-blue);
+  }
+  .p-btn-primary:hover {
+    background: var(--sunrise-dark);
+    border-color: var(--sunrise-dark);
+  }
+  .pricing-note {
+    text-align: center; margin-top: 32px;
+    font-size: 15px; font-weight: 400;
+    opacity: 0.55;
+  }
+
+  /* ===== WHY BOOST ===== */
+  .why-boost {
+    background: var(--soft-white);
+    padding: 88px 64px;
+  }
+  .why-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    max-width: 1180px; margin: 0 auto;
+    align-items: start;
+  }
+  .why-left .section-heading { margin-bottom: 20px; }
+  .why-left .section-subheading { margin-bottom: 36px; max-width: 480px; }
+  .why-cta-row { display: flex; gap: 16px; align-items: center; }
+
+  .use-case-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .uc-mini {
+    background: var(--white);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.2s;
+  }
+  .uc-mini:hover { transform: translateY(-3px); }
+  .uc-mini-icon {
+    width: 40px; height: 40px;
+    border-radius: 50%;
+    background: var(--pool);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; margin-bottom: 12px;
+    color: var(--savvy-blue);
+  }
+  .uc-mini h4 {
+    font-size: 17px; font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .uc-mini p {
+    font-size: 14px; font-weight: 400;
+    line-height: 1.5; opacity: 0.65;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-it-works {
+    background: var(--white);
+    padding: 88px 48px;
+  }
+  .hiw-top { text-align: center; margin-bottom: 56px; }
+  .hiw-track {
+    display: flex; align-items: flex-start;
+    justify-content: center;
+    max-width: 960px; margin: 0 auto;
+    position: relative;
+  }
+  .hiw-track::before {
+    content: '';
+    position: absolute;
+    top: 28px; left: 15%; right: 15%;
+    height: 2px;
+    background: linear-gradient(90deg, var(--pool) 0%, var(--sunrise) 100%);
+  }
+  .hiw-step {
+    flex: 1; text-align: center;
+    position: relative; z-index: 1;
+    padding: 0 16px;
+  }
+  .hiw-num {
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    background: var(--savvy-blue);
+    color: var(--white);
+    font-size: 22px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px;
+    box-shadow: 0 4px 16px rgba(29,65,76,0.15);
+  }
+  .hiw-step h3 {
+    font-size: 20px; font-weight: 600;
+    margin-bottom: 6px;
+  }
+  .hiw-step p {
+    font-size: 15px; font-weight: 400;
+    opacity: 0.6; line-height: 1.5;
+  }
+
+  /* ===== SOCIAL PROOF ===== */
+  .social-proof {
+    background: var(--savvy-blue);
+    padding: 72px 48px;
+    text-align: center;
+    color: var(--white);
+  }
+  .sp-quote {
+    max-width: 720px; margin: 0 auto 32px;
+    font-size: 24px; font-weight: 400;
+    line-height: 1.55; font-style: italic;
+    opacity: 0.9;
+  }
+  .sp-attribution {
+    font-size: 15px; font-weight: 500;
+    opacity: 0.6; margin-bottom: 40px;
+  }
+  .sp-logos {
+    display: flex; align-items: center;
+    justify-content: center; gap: 48px;
+    opacity: 0.3;
+  }
+  .sp-logo-placeholder {
+    font-size: 14px; font-weight: 600;
+    letter-spacing: 1px; text-transform: uppercase;
+  }
+
+  /* ===== CTA BANNER ===== */
+  .cta-banner {
+    background: var(--sunrise);
+    padding: 72px 48px;
+    text-align: center;
+  }
+  .cta-banner h2 {
+    font-size: 44px; font-weight: 600;
+    margin-bottom: 16px; letter-spacing: -0.5px;
+  }
+  .cta-banner p {
+    font-size: 19px; font-weight: 400;
+    margin-bottom: 32px; opacity: 0.8;
+    max-width: 600px; margin-left: auto; margin-right: auto;
+    line-height: 1.55;
+  }
+  .btn-dark {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 36px;
+    background: var(--savvy-blue);
+    color: var(--white);
+    border: 2px solid var(--savvy-blue);
+    border-radius: 50px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-dark:hover { background: transparent; color: var(--savvy-blue); }
+  .btn-sunrise {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 36px;
+    background: var(--sunrise);
+    color: var(--savvy-blue);
+    border: 2px solid var(--savvy-blue);
+    border-radius: 50px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    transition: background 0.2s;
+  }
+  .btn-sunrise:hover { background: var(--sunrise-dark); }
+  .btn-outline-light {
+    display: inline-flex; align-items: center; justify-content: center;
+    padding: 14px 36px;
+    background: transparent;
+    color: var(--savvy-blue);
+    border: 2px solid var(--savvy-blue);
+    border-radius: 50px;
+    font-size: 16px; font-weight: 600;
+    text-decoration: none; cursor: pointer;
+    transition: all 0.2s;
+  }
+  .btn-outline-light:hover { background: var(--savvy-blue); color: var(--white); }
+
+  /* ===== FAQ ===== */
+  .faq {
+    padding: 80px 48px;
+    background: var(--soft-white);
+  }
+  .faq-inner {
+    max-width: 760px; margin: 0 auto;
+  }
+  .faq-top { text-align: center; margin-bottom: 40px; }
+  .faq-item {
+    background: var(--white);
+    border-radius: 12px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .faq-item:hover { box-shadow: 0 4px 16px rgba(29,65,76,0.06); }
+  .faq-q {
+    display: flex; align-items: center;
+    justify-content: space-between;
+    padding: 18px 24px;
+    font-size: 16px; font-weight: 600;
+    min-height: 56px;
+  }
+  .faq-chevron {
+    font-size: 18px; transition: transform 0.3s;
+    opacity: 0.4; flex-shrink: 0; margin-left: 16px;
+  }
+  .faq-item.open .faq-chevron { transform: rotate(180deg); }
+  .faq-a {
+    display: none;
+    padding: 0 24px 20px;
+    font-size: 15px; font-weight: 400;
+    line-height: 1.65; opacity: 0.7;
+  }
+  .faq-item.open .faq-a { display: block; }
+
+  /* ===== FOOTER ===== */
+  .footer { padding: 48px; background: var(--white); }
+  .footer-inner {
+    background: var(--savvy-blue);
+    border-radius: 16px;
+    padding: 48px; color: var(--white);
+  }
+  .footer-top {
+    display: flex; justify-content: space-between;
+    margin-bottom: 48px;
+  }
+  .footer-logo { font-size: 26px; font-weight: 700; }
+  .footer-logo span { font-size: 13px; font-weight: 300; display: block; margin-top: 2px; opacity: 0.6; }
+  .footer-links { display: flex; gap: 72px; }
+  .footer-col h4 {
+    color: var(--sunrise); font-size: 14px;
+    font-weight: 600; margin-bottom: 14px;
+    letter-spacing: 0.5px;
+  }
+  .footer-col a {
+    display: block; color: var(--white); opacity: 0.7;
+    font-size: 15px; font-weight: 300;
+    text-decoration: none; margin-bottom: 8px;
+  }
+  .footer-col a:hover { opacity: 1; }
+  .footer-bottom {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    border-top: 1px solid rgba(255,255,255,0.08); padding-top: 28px;
+  }
+  .footer-social-label {
+    color: var(--sunrise); font-size: 14px;
+    font-weight: 600; margin-bottom: 10px;
+  }
+  .footer-social { display: flex; gap: 8px; }
+  .footer-social-icon {
+    width: 34px; height: 34px; border-radius: 50%;
+    border: 1px solid rgba(255,255,255,0.15);
+    display: flex; align-items: center; justify-content: center;
+    color: var(--white); font-size: 13px; text-decoration: none;
+    transition: border-color 0.2s;
+  }
+  .footer-social-icon:hover { border-color: rgba(255,255,255,0.4); }
+  .footer-newsletter { text-align: right; }
+  .footer-newsletter label {
+    display: block; color: var(--sunrise);
+    font-size: 14px; font-weight: 600; margin-bottom: 8px;
+  }
+  .footer-nl-row { display: flex; }
+  .footer-nl-row input {
+    background: transparent;
+    border: 1px solid rgba(255,255,255,0.2);
+    border-right: none;
+    border-radius: 22px 0 0 22px;
+    padding: 10px 18px;
+    color: var(--white);
+    font-size: 14px; width: 260px; outline: none;
+  }
+  .footer-nl-row input::placeholder { color: rgba(255,255,255,0.35); }
+  .footer-nl-row button {
+    background: var(--sunrise); border: 1px solid var(--sunrise);
+    border-radius: 0 22px 22px 0;
+    padding: 10px 18px; color: var(--savvy-blue);
+    font-weight: 600; font-size: 13px; cursor: pointer;
+  }
+  .footer-copyright {
+    text-align: right; font-size: 13px; font-weight: 300;
+    color: var(--savvy-blue); margin-top: 14px; opacity: 0.5;
+  }
+  .footer-copyright a { color: var(--savvy-blue); }
+
+  /* ===== V3 BADGE ===== */
+  .v3-badge {
+    position: fixed; top: 80px; right: 12px;
+    background: var(--savvy-blue); color: var(--white);
+    padding: 6px 14px; border-radius: 8px;
+    font-size: 12px; font-weight: 600; z-index: 200;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    letter-spacing: 0.3px;
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE - TABLET (max-width: 1024px)
+     ═══════════════════════════════════════════ */
+  @media (max-width: 1024px) {
+    /* Nav */
+    .nav { padding: 0 24px; }
+    .nav-link { display: none; }
+
+    /* Hero */
+    .hero { min-height: 420px; }
+    .hero-content { padding: 0 32px 40px; }
+    .hero h1 { font-size: 42px; }
+    .hero p { font-size: 18px; }
+
+    /* Pricing - 2x2 grid on tablet */
+    .pricing { padding: 64px 24px 72px; }
+    .pricing-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+      max-width: 720px;
+    }
+    .p-card.recommended {
+      transform: scale(1);
+    }
+    .p-card.recommended:hover {
+      transform: translateY(-6px);
+    }
+
+    /* Why Boost */
+    .why-boost { padding: 64px 32px; }
+    .why-inner {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .why-left .section-subheading { max-width: 100%; }
+    .use-case-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* How It Works */
+    .how-it-works { padding: 64px 24px; }
+
+    /* CTA Banner */
+    .cta-banner { padding: 56px 24px; }
+    .cta-banner h2 { font-size: 36px; }
+
+    /* FAQ */
+    .faq { padding: 64px 24px; }
+
+    /* Section headings */
+    .section-heading { font-size: 34px; }
+
+    /* Footer */
+    .footer { padding: 24px; }
+    .footer-inner { padding: 32px; }
+    .footer-links { gap: 40px; }
+    .footer-nl-row input { width: 200px; }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE - MOBILE (max-width: 768px)
+     ═══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav { padding: 0 16px; height: 60px; }
+    .nav-logo { font-size: 22px; }
+
+    /* Hero */
+    .hero { min-height: 360px; margin-top: 60px; }
+    .hero-content { padding: 0 20px 32px; max-width: 100%; }
+    .hero h1 { font-size: 32px; letter-spacing: -0.5px; }
+    .hero p { font-size: 16px; max-width: 100%; }
+
+    /* Section headings */
+    .section-heading { font-size: 28px; }
+    .section-subheading { font-size: 16px; }
+
+    /* Pricing - single column, recommended card first via order */
+    .pricing { padding: 48px 16px 56px; }
+    .pricing-top { margin-bottom: 32px; }
+    .pricing-grid {
+      grid-template-columns: 1fr;
+      max-width: 480px;
+      gap: 16px;
+    }
+    /* Reorder: recommended card first on mobile */
+    .p-card.recommended { order: -1; }
+    .p-card { border-radius: 16px; }
+    .p-card:hover { transform: none; box-shadow: none; }
+    .p-card.recommended:hover { transform: none; }
+    .p-price { font-size: 28px; }
+    .pricing-note { font-size: 14px; margin-top: 24px; }
+
+    /* Why Boost */
+    .why-boost { padding: 48px 20px; }
+    .why-inner { gap: 32px; }
+    .why-cta-row {
+      flex-direction: column;
+      align-items: stretch;
+    }
+    .btn-sunrise, .btn-outline-light {
+      text-align: center;
+      padding: 14px 24px;
+    }
+    .use-case-grid {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .uc-mini { padding: 20px; }
+
+    /* How It Works - vertical stack */
+    .how-it-works { padding: 48px 20px; }
+    .hiw-top { margin-bottom: 32px; }
+    .hiw-track {
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .hiw-track::before {
+      /* Vertical connector line */
+      top: 0; bottom: 0;
+      left: 50%; right: auto;
+      width: 2px; height: 100%;
+    }
+    .hiw-step {
+      max-width: 320px;
+      padding: 0;
+    }
+    .hiw-num {
+      width: 48px; height: 48px;
+      font-size: 20px;
+    }
+    .hiw-step h3 { font-size: 18px; }
+
+    /* CTA Banner */
+    .cta-banner { padding: 48px 20px; }
+    .cta-banner h2 { font-size: 28px; }
+    .cta-banner p { font-size: 16px; }
+    .btn-dark { padding: 14px 28px; font-size: 15px; }
+
+    /* FAQ */
+    .faq { padding: 48px 16px; }
+    .faq-q { padding: 16px 20px; font-size: 15px; }
+    .faq-a { padding: 0 20px 16px; font-size: 14px; }
+
+    /* Footer */
+    .footer { padding: 16px; }
+    .footer-inner { padding: 24px; border-radius: 12px; }
+    .footer-top {
+      flex-direction: column;
+      gap: 32px;
+    }
+    .footer-links {
+      flex-direction: column;
+      gap: 24px;
+    }
+    .footer-bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 24px;
+    }
+    .footer-newsletter { text-align: left; }
+    .footer-nl-row input { width: 100%; min-width: 0; }
+    .footer-nl-row { width: 100%; }
+    .footer-copyright { text-align: left; font-size: 12px; }
+
+    /* V3 badge */
+    .v3-badge { top: 68px; right: 8px; font-size: 11px; padding: 4px 10px; }
+  }
+
+  /* ═══════════════════════════════════════════
+     RESPONSIVE - SMALL MOBILE (max-width: 400px)
+     ═══════════════════════════════════════════ */
+  @media (max-width: 400px) {
+    .hero h1 { font-size: 26px; }
+    .hero p { font-size: 15px; }
+    .section-heading { font-size: 24px; }
+    .cta-banner h2 { font-size: 24px; }
+    .p-header { padding: 20px 16px 16px; }
+    .p-body { padding: 16px; }
+    .p-footer { padding: 0 16px 16px; }
+    .p-best-for { padding: 0 16px 8px; }
+    .footer-inner { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="v3-badge">V3 - Blue Sky Redesign</div>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+     ═══════════════════════════════════════════ -->
+<nav class="nav">
+  <div class="nav-logo">Savvy<span>Stay smarter.</span></div>
+  <div class="nav-right">
+    <a href="#" class="nav-link">List your properties</a>
+    <div class="nav-icons">
+      <div class="nav-icon">👤</div>
+      <div class="nav-icon">☰</div>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════════════════════════
+     1. HERO  - compact, confident, benefit-first
+     ═══════════════════════════════════════════ -->
+<section class="hero">
+  <div class="hero-content">
+    <h1>More visibility. More bookings. More revenue.</h1>
+    <p>Boosted listings put your properties in front of more travelers when they're actively searching your market.</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     3. PRICING  - the main event, shown early
+     ═══════════════════════════════════════════ -->
+<section class="pricing" id="pricing">
+  <div class="pricing-top">
+    <div class="section-label">Pricing</div>
+    <h2 class="section-heading">Choose your visibility level</h2>
+  </div>
+
+  <div class="pricing-grid">
+
+    <!-- Standard -->
+    <div class="p-card">
+      <div class="p-header">
+        <div class="p-tier">Standard</div>
+        <div class="p-price-row">
+          <span class="p-price">Free</span>
+        </div>
+        <div class="p-period">Included with every listing</div>
+      </div>
+      <div class="p-body">
+        <div class="p-exposure">
+          <span class="p-exposure-multiplier">1x</span>
+          <span class="p-exposure-label">Baseline visibility</span>
+        </div>
+        <ul class="p-features">
+          <li>Included in search results</li>
+          <li>Basic listing profile</li>
+          <li>Standard search placement</li>
+        </ul>
+      </div>
+      <div class="p-best-for"><strong>Best for:</strong> Testing the platform or low-competition markets</div>
+      <div class="p-footer">
+        <a href="#" class="p-btn">Get started free</a>
+      </div>
+    </div>
+
+    <!-- Boost -->
+    <div class="p-card">
+      <div class="p-header">
+        <div class="p-tier">Boost</div>
+        <div class="p-price-row">
+          <span class="p-price">$29.99</span>
+          <span class="p-period">/month</span>
+        </div>
+        <div class="p-daily">That's less than a dollar a day</div>
+      </div>
+      <div class="p-body">
+        <div class="p-exposure">
+          <span class="p-exposure-multiplier">3.4x</span>
+          <span class="p-exposure-label">more exposure</span>
+        </div>
+        <ul class="p-features">
+          <li>Basic listing profile</li>
+          <li>Priority search placement</li>
+          <li>Adjust or cancel anytime</li>
+        </ul>
+      </div>
+      <div class="p-best-for"><strong>Best for:</strong> Seasonal boosts or newer properties</div>
+      <div class="p-footer">
+        <a href="#" class="p-btn">Select Boost</a>
+      </div>
+    </div>
+
+    <!-- Boost Plus (recommended) -->
+    <div class="p-card recommended">
+      <div class="p-badge">Most popular</div>
+      <div class="p-header">
+        <div class="p-tier">Boost Plus</div>
+        <div class="p-price-row">
+          <span class="p-price">$39.99</span>
+          <span class="p-period">/month</span>
+        </div>
+        <div class="p-daily">Just $1.33/day per listing</div>
+      </div>
+      <div class="p-body">
+        <div class="p-exposure">
+          <span class="p-exposure-multiplier">6.6x</span>
+          <span class="p-exposure-label">more exposure</span>
+        </div>
+        <ul class="p-features">
+          <li>Basic listing profile</li>
+          <li>Top-tier search placement</li>
+          <li>Adjust or cancel anytime</li>
+        </ul>
+      </div>
+      <div class="p-best-for"><strong>Best for:</strong> Competitive markets needing consistent visibility</div>
+      <div class="p-footer">
+        <a href="#" class="p-btn p-btn-primary">Select Boost Plus</a>
+      </div>
+    </div>
+
+    <!-- Boost Max -->
+    <div class="p-card">
+      <div class="p-header">
+        <div class="p-tier">Boost Max</div>
+        <div class="p-price-row">
+          <span class="p-price">$99.99</span>
+          <span class="p-period">/month</span>
+        </div>
+        <div class="p-daily">$3.33/day per listing</div>
+      </div>
+      <div class="p-body">
+        <div class="p-exposure">
+          <span class="p-exposure-multiplier">11.8x</span>
+          <span class="p-exposure-label">more exposure</span>
+        </div>
+        <ul class="p-features">
+          <li>Basic listing profile</li>
+          <li>Maximum search visibility</li>
+          <li>Adjust or cancel anytime</li>
+        </ul>
+      </div>
+      <div class="p-best-for"><strong>Best for:</strong> High-value properties in competitive markets</div>
+      <div class="p-footer">
+        <a href="#" class="p-btn">Select Boost Max</a>
+      </div>
+    </div>
+
+  </div>
+  <p class="pricing-note">All plans are per listing, billed monthly. No long-term contracts. Adjust or cancel anytime.</p>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     4. WHY BOOST + USE CASES  - two-column
+     ═══════════════════════════════════════════ -->
+<section class="why-boost">
+  <div class="why-inner">
+    <div class="why-left">
+      <div class="section-label">Why boost</div>
+      <h2 class="section-heading">When travelers search, be impossible to&nbsp;miss.</h2>
+      <p class="section-subheading">Every day, travelers are searching for properties in your market. Boosted listings make sure yours are the ones they see first, turning searches into stays.</p>
+      <div class="why-cta-row">
+        <a href="#pricing" class="btn-sunrise">Boost your listings</a>
+        <a href="#how" class="btn-outline-light">See how it works</a>
+      </div>
+    </div>
+    <div class="use-case-grid">
+      <div class="uc-mini">
+        <div class="uc-mini-icon">🚀</div>
+        <h4>New launches</h4>
+        <p>Maximum visibility when you need it the most.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">⚡</div>
+        <h4>Competitive markets</h4>
+        <p>Stand out when multiple properties compete for the same search.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">📅</div>
+        <h4>Slower seasons</h4>
+        <p>Fill gaps during your market's off-peak months.</p>
+      </div>
+      <div class="uc-mini">
+        <div class="uc-mini-icon">💎</div>
+        <h4>High-value properties</h4>
+        <p>When one extra booking more than covers the cost.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     5. HOW IT WORKS  - minimal stepper
+     ═══════════════════════════════════════════ -->
+<section class="how-it-works" id="how">
+  <div class="hiw-top">
+    <div class="section-label">How it works</div>
+    <h2 class="section-heading">Three steps. That's it.</h2>
+  </div>
+  <div class="hiw-track">
+    <div class="hiw-step">
+      <div class="hiw-num">1</div>
+      <h3>Choose your level</h3>
+      <p>Pick the visibility tier that fits your goals and budget.</p>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">2</div>
+      <h3>Select properties</h3>
+      <p>Apply different tiers to individual listings, your call.</p>
+    </div>
+    <div class="hiw-step">
+      <div class="hiw-num">3</div>
+      <h3>See results</h3>
+      <p>Track performance and adjust anytime. No lock-ins.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     7. CTA BANNER  - final push
+     ═══════════════════════════════════════════ -->
+<section class="cta-banner">
+  <h2>Ready to get found more?</h2>
+  <p>Pick your boost level and start getting more visibility today. Adjust anytime, no commitments.</p>
+  <a href="#pricing" class="btn-dark">Choose your boost level</a>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     8. FAQ  - compact, on soft white
+     ═══════════════════════════════════════════ -->
+<section class="faq">
+  <div class="faq-inner">
+    <div class="faq-top">
+      <h2 class="section-heading">Questions? We've got answers.</h2>
+    </div>
+
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><span>Do I have to boost all my properties?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Not at all. You choose which properties to boost and at what level. Apply different tiers to different listings based on each property's needs.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><span>Can I change or cancel anytime?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Yes. Upgrade, downgrade, or cancel your boost level whenever you want. There are no long-term contracts or cancellation fees.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><span>How quickly will I see results?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Your boosted placement takes effect immediately. Most hosts notice increased impressions within the first week.</div>
+    </div>
+    <div class="faq-item open" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><span>Will boosting guarantee more bookings?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Boosted listings drive more visibility to your properties. More travelers will see them. What happens next depends on you: competitive pricing, compelling photos, and clear descriptions turn that attention into bookings.</div>
+    </div>
+    <div class="faq-item" onclick="this.classList.toggle('open')">
+      <div class="faq-q"><span>How is exposure calculated?</span><span class="faq-chevron">▾</span></div>
+      <div class="faq-a">Exposure measures how often your listing appears in traveler search results compared to Standard-level listings in the same market over the same time period.</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════
+     9. FOOTER
+     ═══════════════════════════════════════════ -->
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div class="footer-logo">Savvy<span>Stay smarter.</span></div>
+      <div class="footer-links">
+        <div class="footer-col">
+          <h4>Company</h4>
+          <a href="#">About us</a><a href="#">Journal</a><a href="#">Press</a><a href="#">Careers</a>
+        </div>
+        <div class="footer-col">
+          <h4>Support</h4>
+          <a href="#">Help center</a><a href="#">Accessibility</a><a href="#">Gift cards</a>
+        </div>
+        <div class="footer-col">
+          <h4>For hosts</h4>
+          <a href="#">List your property</a><a href="#">Integrations</a><a href="#">Host support</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>
+        <div class="footer-social-label">Stay in touch</div>
+        <div class="footer-social">
+          <a href="#" class="footer-social-icon">f</a>
+          <a href="#" class="footer-social-icon">𝕏</a>
+          <a href="#" class="footer-social-icon">in</a>
+          <a href="#" class="footer-social-icon">ig</a>
+          <a href="#" class="footer-social-icon">▶</a>
+          <a href="#" class="footer-social-icon">tt</a>
+        </div>
+      </div>
+      <div class="footer-newsletter">
+        <label>Sign up for our newsletter:</label>
+        <div class="footer-nl-row">
+          <input type="email" placeholder="name@email.com">
+          <button>Subscribe</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-copyright">© 2025 finderco, LLC all rights reserved · <a href="#">Privacy</a> · <a href="#">Terms</a> · <a href="#">Site map</a></div>
+</footer>
+
+</body>
+</html>
