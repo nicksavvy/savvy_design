@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Why Book with Savvy — Card Variations</title>
+  <!-- TrustBox script -->
+  <script type="text/javascript" src="https://widget.trustpilot.com/bootstrap/v5/tp.widget.bootstrap.min.js" async></script>
+  <!-- End TrustBox script -->
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Roobert', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #ffffff;
+      color: #1D414C;
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: #1D414C;
+      margin-bottom: 8px;
+      text-align: center;
+    }
+
+    .page-subtitle {
+      font-size: 14px;
+      color: #8a8a7e;
+      text-align: center;
+      margin-bottom: 48px;
+      max-width: 500px;
+    }
+
+    /* ===== CARD BASE ===== */
+    .card-section {
+      width: 100%;
+      max-width: 520px;
+      margin-bottom: 56px;
+    }
+
+    .card-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a8a7e;
+      margin-bottom: 12px;
+      padding-left: 4px;
+    }
+
+    .savvy-card {
+      width: 100%;
+      padding: 28px 24px;
+      background: #F4F1E9;
+      border-radius: 16px;
+      border: 1px solid #d7d8d3;
+    }
+
+    .savvy-card h3 {
+      font-size: 18px;
+      font-weight: 700;
+      color: #1D414C;
+      margin-bottom: 20px;
+    }
+
+    .value-props {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .value-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .value-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: #C3E2DB;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .value-text-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: #1D414C;
+      margin-bottom: 2px;
+    }
+
+    .value-text-desc {
+      font-size: 13px;
+      color: #6d6d61;
+      line-height: 1.5;
+    }
+
+    .learn-more-divider {
+      margin-top: 20px;
+      padding-top: 16px;
+      border-top: 1px solid #d7d8d3;
+    }
+
+    .learn-more-link {
+      font-size: 14px;
+      font-weight: 500;
+      color: #1D414C;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      cursor: pointer;
+    }
+    .learn-more-link:hover { color: #2a5a68; }
+
+    /* ===== TRUSTPILOT SEAMLESS ROW ===== */
+    .tp-seamless-row {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 0 0 0;
+      border-top: 1px solid #d7d8d3;
+      margin-top: 20px;
+    }
+
+    .tp-seamless-row .tp-widget-inline {
+      flex: 1;
+      min-width: 0;
+    }
+
+    /* ===== TRUSTPILOT FOOTER STRIP ===== */
+    .tp-footer-strip {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #eae7de;
+      border-radius: 0 0 16px 16px;
+      margin: 20px -24px -28px -24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .tp-footer-strip .tp-label {
+      font-size: 13px;
+      font-weight: 500;
+      color: #6d6d61;
+      white-space: nowrap;
+    }
+
+    .tp-footer-strip .tp-widget-inline {
+      width: 180px;
+    }
+
+    /* ===== EMOJI PALETTE ===== */
+    .emoji-palette {
+      width: 100%;
+      max-width: 700px;
+      margin-bottom: 56px;
+    }
+
+    .palette-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .emoji-option {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: #F4F1E9;
+      border-radius: 12px;
+      border: 1px solid #e8e8e4;
+    }
+
+    .emoji-option .ei {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      background: #C3E2DB;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 18px;
+    }
+
+    .emoji-option .el {
+      font-size: 13px;
+      font-weight: 500;
+      color: #1D414C;
+    }
+
+    .emoji-option .ec {
+      font-size: 11px;
+      color: #8a8a7e;
+      margin-top: 1px;
+    }
+
+    .palette-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #8a8a7e;
+      margin-bottom: 12px;
+      margin-top: 24px;
+      padding-left: 4px;
+    }
+
+    /* ===== DIVIDER ===== */
+    hr.section-break {
+      width: 100%;
+      max-width: 520px;
+      border: none;
+      border-top: 2px dashed #d7d8d3;
+      margin: 8px 0 48px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Why book with Savvy — Card Mockups</h1>
+  <p class="page-subtitle">Pick-and-choose bullet options with Trustpilot integrated seamlessly. Open in browser to see live widgets.</p>
+
+  <!-- ============================================ -->
+  <!-- VARIATION A: Compact 3-row + Micro Review Count -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-label">Variation A — Compact with centered Micro Review Count</div>
+    <div class="savvy-card">
+      <h3>Why book with Savvy</h3>
+
+      <div class="value-props">
+        <div class="value-row">
+          <div class="value-icon">💰</div>
+          <div>
+            <p class="value-text-title">Over $1M saved on fees</p>
+            <p class="value-text-desc">Same properties as Airbnb, without the service charges.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">🔒</div>
+          <div>
+            <p class="value-text-title">Only vetted, professional hosts</p>
+            <p class="value-text-desc">We screen every host and property before listing.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">🎉</div>
+          <div>
+            <p class="value-text-title">Over 2,000 happy customers</p>
+            <p class="value-text-desc">Real people booking smarter vacations every day.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trustpilot Micro Review Count widget — centered -->
+      <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #d7d8d3; text-align: center;">
+        <div style="display: inline-block;">
+          <div class="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="5419b6a8b0d04a076446a9ad"
+            data-businessunit-id="6814e6ec96bb8d7784e2e2ec"
+            data-style-height="24px"
+            data-style-width="100%"
+            data-token="a6e2e62b-e3ea-4322-93b5-401b5ff61219"
+            data-min-review-count="0"
+            data-style-alignment="center"
+            data-theme="light">
+            <a href="https://www.trustpilot.com/review/savvy.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 14px;">
+        <a href="#" class="learn-more-link" onclick="event.preventDefault()" style="font-size: 13px;">Learn more about how Savvy works →</a>
+      </div>
+    </div>
+    <div style="margin-top: 12px; padding: 0 4px;">
+      <p style="font-size: 12px; color: #8a8a7e; line-height: 1.5;">Micro Review Count widget centered below the bullets — "See our 76 reviews on ★ Trustpilot". Compact, no score shown, just review count + stars.</p>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- VARIATION B: Trustpilot as footer strip      -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-label">Variation B — Trustpilot footer strip</div>
+    <div class="savvy-card">
+      <h3>Why book with Savvy</h3>
+
+      <div class="value-props">
+        <div class="value-row">
+          <div class="value-icon">💸</div>
+          <div>
+            <p class="value-text-title">Over $1M saved on fees</p>
+            <p class="value-text-desc">Book direct and skip the platform fees. Same property, better price.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">🏡</div>
+          <div>
+            <p class="value-text-title">Only vetted, professional hosts</p>
+            <p class="value-text-desc">Every property is reviewed before it goes live on Savvy.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">👥</div>
+          <div>
+            <p class="value-text-title">Over 2,000 happy customers</p>
+            <p class="value-text-desc">Join thousands who book smarter with Savvy.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trustpilot as a seamless footer -->
+      <div class="tp-footer-strip">
+        <span class="tp-label">Rated on</span>
+        <div class="tp-widget-inline">
+          <div class="trustpilot-widget"
+            data-locale="en-US"
+            data-template-id="5419b6a8b0d04a076446a9ad"
+            data-businessunit-id="6814e6ec96bb8d7784e2e2ec"
+            data-style-height="24px"
+            data-style-width="100%"
+            data-token="a6e2e62b-e3ea-4322-93b5-401b5ff61219"
+            data-min-review-count="0"
+            data-style-alignment="center"
+            data-theme="light">
+            <a href="https://www.trustpilot.com/review/savvy.com" target="_blank" rel="noopener">Trustpilot</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 12px; padding: 0 4px;">
+      <p style="font-size: 12px; color: #8a8a7e; line-height: 1.5;">Trustpilot sits as a subtle footer bar at the bottom of the card. Clean separation — it's "powered by" proof, not a bullet.</p>
+    </div>
+  </div>
+
+  <!-- ============================================ -->
+  <!-- VARIATION C: Trustpilot as inline row        -->
+  <!-- ============================================ -->
+  <div class="card-section">
+    <div class="card-label">Variation C — Trustpilot as inline row</div>
+    <div class="savvy-card">
+      <h3>Why book with Savvy</h3>
+
+      <div class="value-props">
+        <div class="value-row">
+          <div class="value-icon">🏷️</div>
+          <div>
+            <p class="value-text-title">Save up to 15% vs. Airbnb</p>
+            <p class="value-text-desc">No platform fees — you keep more for the vacation.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">✅</div>
+          <div>
+            <p class="value-text-title">Only vetted, professional hosts</p>
+            <p class="value-text-desc">Every property is reviewed before it goes live on Savvy.</p>
+          </div>
+        </div>
+
+        <div class="value-row">
+          <div class="value-icon">🤝</div>
+          <div>
+            <p class="value-text-title">Over 2,000 customers trust Savvy</p>
+            <p class="value-text-desc">Join the community booking smarter.</p>
+          </div>
+        </div>
+
+        <!-- Trustpilot as a natural 4th row -->
+        <div class="value-row" style="align-items: center;">
+          <div class="value-icon" style="background: #00b67a; color: white; font-size: 16px; font-weight: 700;">★</div>
+          <div style="flex: 1;">
+            <div style="width: 220px;">
+              <div class="trustpilot-widget"
+                data-locale="en-US"
+                data-template-id="5419b6a8b0d04a076446a9ad"
+                data-businessunit-id="6814e6ec96bb8d7784e2e2ec"
+                data-style-height="24px"
+                data-style-width="100%"
+                data-token="a6e2e62b-e3ea-4322-93b5-401b5ff61219"
+                data-min-review-count="0"
+                data-style-alignment="left"
+                data-theme="light">
+                <a href="https://www.trustpilot.com/review/savvy.com" target="_blank" rel="noopener">Trustpilot</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="learn-more-divider">
+        <a href="#" class="learn-more-link" onclick="event.preventDefault()">Learn more about how Savvy works →</a>
+      </div>
+    </div>
+    <div style="margin-top: 12px; padding: 0 4px;">
+      <p style="font-size: 12px; color: #8a8a7e; line-height: 1.5;">Trustpilot sits as a natural 4th bullet with a green Trustpilot-branded icon. The widget speaks for itself — no extra label needed.</p>
+    </div>
+  </div>
+
+  <hr class="section-break">
+
+  <!-- ============================================ -->
+  <!-- EMOJI PALETTE: Pick and choose               -->
+  <!-- ============================================ -->
+  <div class="emoji-palette">
+    <h1 style="font-size: 22px; text-align: left; margin-bottom: 4px;">Emoji Bullet Palette</h1>
+    <p style="font-size: 13px; color: #8a8a7e; margin-bottom: 24px;">Mix and match — pick 3-4 for the final card.</p>
+
+    <div class="palette-label">Savings & Price</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">💸</div>
+        <div><div class="el">Over $1M saved on fees</div><div class="ec">Big, impressive stat</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">💰</div>
+        <div><div class="el">Over $1M saved on fees</div><div class="ec">Money bag — classic</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🏷️</div>
+        <div><div class="el">Save up to 15% vs. Airbnb</div><div class="ec">Price tag — deals energy</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">📉</div>
+        <div><div class="el">Save up to 15% vs. Airbnb</div><div class="ec">Lower prices visual</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🤑</div>
+        <div><div class="el">Skip the platform fees</div><div class="ec">Playful savings</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">💵</div>
+        <div><div class="el">No hidden fees, ever</div><div class="ec">Cash — simple and direct</div></div>
+      </div>
+    </div>
+
+    <div class="palette-label">Trust & Vetting</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">✅</div>
+        <div><div class="el">Only vetted, professional hosts</div><div class="ec">Checkmark — verified feel</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🔒</div>
+        <div><div class="el">Only vetted, professional hosts</div><div class="ec">Security / trust lock</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🛡️</div>
+        <div><div class="el">Only vetted, professional hosts</div><div class="ec">Shield — protection</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🏡</div>
+        <div><div class="el">Only vetted, professional hosts</div><div class="ec">Home — warm, welcoming</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🔍</div>
+        <div><div class="el">Every listing is hand-reviewed</div><div class="ec">Magnifying glass — scrutiny</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">👁️</div>
+        <div><div class="el">We inspect every property</div><div class="ec">Eye — oversight</div></div>
+      </div>
+    </div>
+
+    <div class="palette-label">Community & Customers</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">👥</div>
+        <div><div class="el">Over 2,000 happy customers</div><div class="ec">People — community</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🤝</div>
+        <div><div class="el">Over 2,000 customers trust Savvy</div><div class="ec">Handshake — partnership</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🎉</div>
+        <div><div class="el">Over 2,000 happy customers</div><div class="ec">Celebration — fun energy</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">❤️</div>
+        <div><div class="el">Loved by 2,000+ guests</div><div class="ec">Heart — emotional</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🌟</div>
+        <div><div class="el">2,000+ five-star stays</div><div class="ec">Star — premium feel</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">👨‍👩‍👧‍👦</div>
+        <div><div class="el">Families love booking on Savvy</div><div class="ec">Family — segment-specific</div></div>
+      </div>
+    </div>
+
+    <div class="palette-label">Support & Service</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">💬</div>
+        <div><div class="el">Real humans, real support</div><div class="ec">Chat bubble — responsive</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">📞</div>
+        <div><div class="el">Support when you need it</div><div class="ec">Phone — direct access</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🙋</div>
+        <div><div class="el">Concierge-level support</div><div class="ec">Person raising hand — helpful</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">⚡</div>
+        <div><div class="el">Fast response times</div><div class="ec">Lightning — speed</div></div>
+      </div>
+    </div>
+
+    <div class="palette-label">Booking Experience</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">🎯</div>
+        <div><div class="el">Book direct — no middleman</div><div class="ec">Bullseye — direct</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">⏱️</div>
+        <div><div class="el">Book in under 2 minutes</div><div class="ec">Stopwatch — speed</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">📅</div>
+        <div><div class="el">Free cancellation available</div><div class="ec">Calendar — flexibility</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🔄</div>
+        <div><div class="el">Flexible cancellation policy</div><div class="ec">Arrows — flexibility</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🗝️</div>
+        <div><div class="el">Instant booking, no waiting</div><div class="ec">Key — access</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">✨</div>
+        <div><div class="el">A better way to book vacation homes</div><div class="ec">Sparkle — premium feel</div></div>
+      </div>
+    </div>
+
+    <div class="palette-label">Trustpilot / Social Proof (non-widget)</div>
+    <div class="palette-grid">
+      <div class="emoji-option">
+        <div class="ei">⭐</div>
+        <div><div class="el">Rated on Trustpilot</div><div class="ec">Star — ratings</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei" style="background: #00b67a; color: white; font-size: 16px; font-weight: 700;">★</div>
+        <div><div class="el">Trustpilot verified reviews</div><div class="ec">TP green — on-brand for Trustpilot</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">🏆</div>
+        <div><div class="el">Top-rated on Trustpilot</div><div class="ec">Trophy — achievement</div></div>
+      </div>
+      <div class="emoji-option">
+        <div class="ei">📣</div>
+        <div><div class="el">See what guests are saying</div><div class="ec">Megaphone — voice</div></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
