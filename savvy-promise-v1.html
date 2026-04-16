@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Savvy Promise — V1: Alternating Sections</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap');
+
+    :root {
+      --savvy-blue: #1D414C;
+      --savvy-blue-dark: #18343C;
+      --savvy-blue-light: #37788A;
+      --pool: #C3E2DB;
+      --soft-white: #F4F1E9;
+      --sunrise: #FCB22D;
+      --sunrise-dark: #E59603;
+      --white: #FFFFFF;
+      --gray-main: #6d6d61;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--soft-white);
+      color: var(--savvy-blue);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero: Big bold centered ── */
+    .hero {
+      background: var(--savvy-blue);
+      padding: 100px 48px 88px;
+      text-align: center;
+    }
+
+    .hero-inner {
+      max-width: 760px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(195, 226, 219, 0.15);
+      border: 1px solid rgba(195, 226, 219, 0.25);
+      border-radius: 100px;
+      padding: 8px 20px 8px 12px;
+      margin-bottom: 36px;
+    }
+
+    .hero-badge svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--sunrise);
+    }
+
+    .hero-badge span {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--pool);
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .hero h1 {
+      font-size: 64px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: 28px;
+      letter-spacing: -1px;
+    }
+
+    .hero h1 em {
+      font-style: normal;
+      color: var(--sunrise);
+    }
+
+    .hero p {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--pool);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ── Alternating promise rows ── */
+    .promise-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      max-width: 1200px;
+      margin: 0 auto;
+      min-height: 420px;
+    }
+
+    .promise-row:nth-child(even) .promise-text { order: 2; }
+    .promise-row:nth-child(even) .promise-visual { order: 1; }
+
+    .promise-text {
+      padding: 72px 64px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .promise-number {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--sunrise);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .promise-text h2 {
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.3px;
+    }
+
+    .promise-text p {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--savvy-blue);
+      opacity: 0.8;
+    }
+
+    .promise-visual {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 48px;
+    }
+
+    /* Visual backgrounds alternate */
+    .vis-pool { background: var(--pool); }
+    .vis-white { background: var(--white); }
+    .vis-soft { background: var(--soft-white); }
+    .vis-blue { background: var(--savvy-blue); }
+    .vis-sunrise-light { background: rgba(252, 178, 45, 0.08); }
+
+    .promise-visual svg {
+      width: 200px;
+      height: 200px;
+    }
+
+    /* ── Commitment CTA ── */
+    .commitment {
+      background: var(--pool);
+      padding: 96px 48px;
+      text-align: center;
+    }
+
+    .commitment-inner {
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    .commitment h2 {
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--savvy-blue);
+      margin-bottom: 20px;
+      letter-spacing: -0.5px;
+    }
+
+    .commitment p {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--savvy-blue);
+      line-height: 1.7;
+      opacity: 0.8;
+      margin-bottom: 36px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--sunrise);
+      color: var(--savvy-blue);
+      font-weight: 600;
+      font-size: 17px;
+      padding: 16px 40px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--sunrise-dark);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 40px; }
+      .hero { padding: 64px 24px 56px; }
+      .promise-row { grid-template-columns: 1fr; min-height: auto; }
+      .promise-row:nth-child(even) .promise-text { order: 1; }
+      .promise-row:nth-child(even) .promise-visual { order: 2; }
+      .promise-text { padding: 48px 24px; }
+      .promise-visual { padding: 32px; min-height: 240px; }
+      .commitment { padding: 64px 24px; }
+      .commitment h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-1.5 14.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.09-5.09L17 10l-6.5 6.5z"/></svg>
+        <span>Our Trust Promise</span>
+      </div>
+      <h1>The Savvy <em>Promise</em></h1>
+      <p>When you book on Savvy, you're not booking through a middleman — you're booking directly with trusted, professional property managers. That means real transparency, no traveler booking fees and no platform standing between you and a great hospitality experience.</p>
+    </div>
+  </section>
+
+  <!-- 1. Vetted Hosts -->
+  <section class="promise-row">
+    <div class="promise-text">
+      <div class="promise-number">01 — Trust</div>
+      <h2>Vetted, Professional Hosts</h2>
+      <p>Every property on Savvy is managed by a verified, professional property manager — not a hobbyist host. These are operators who run hospitality as a business, with dedicated teams, established processes and properties maintained to a professional standard. Before listing on Savvy, every host agrees to our code of conduct, committing to accurate listings, fair pricing, and a guest experience they stand behind.</p>
+    </div>
+    <div class="promise-visual vis-pool">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="40" y="80" width="120" height="90" rx="8" fill="#1D414C" opacity="0.12"/>
+        <rect x="48" y="88" width="104" height="74" rx="6" fill="white" opacity="0.9"/>
+        <polygon points="100,45 30,85 170,85" fill="#1D414C" opacity="0.12"/>
+        <polygon points="100,52 40,85 160,85" fill="white" opacity="0.7"/>
+        <rect x="85" y="115" width="30" height="47" rx="4" fill="#1D414C" opacity="0.15"/>
+        <circle cx="109" cy="139" r="2.5" fill="#FCB22D"/>
+        <rect x="58" y="100" width="22" height="18" rx="3" fill="#C3E2DB"/>
+        <rect x="120" y="100" width="22" height="18" rx="3" fill="#C3E2DB"/>
+        <g transform="translate(140, 40)">
+          <path d="M20 4L8 9v7c0 6.1 4.2 11.8 9.9 13.2L20 30l2.1-.8C27.8 27.8 32 22.1 32 16V9L20 4z" fill="#FCB22D"/>
+          <path d="M17.5 21l-3.5-3.5 1.2-1.2 2.3 2.3 5.3-5.3 1.2 1.2-6.5 6.5z" fill="#1D414C"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 2. Accurate Pricing -->
+  <section class="promise-row">
+    <div class="promise-text">
+      <div class="promise-number">02 — Clarity</div>
+      <h2>Accurate Pricing & Availability</h2>
+      <p>Rates, fees, and availability are pulled directly from the host's system in real time. What you see reflects what the host offers — no outdated pricing or unexpected platform markups or booking fees.</p>
+    </div>
+    <div class="promise-visual vis-sunrise-light">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect x="35" y="50" width="130" height="100" rx="12" fill="#1D414C" opacity="0.08"/>
+        <rect x="42" y="57" width="116" height="86" rx="8" fill="white" opacity="0.9"/>
+        <!-- Price rows -->
+        <rect x="55" y="72" width="60" height="8" rx="4" fill="#C3E2DB"/>
+        <rect x="125" y="72" width="24" height="8" rx="4" fill="#1D414C" opacity="0.15"/>
+        <rect x="55" y="90" width="48" height="8" rx="4" fill="#C3E2DB"/>
+        <rect x="125" y="90" width="24" height="8" rx="4" fill="#1D414C" opacity="0.15"/>
+        <rect x="55" y="108" width="55" height="8" rx="4" fill="#C3E2DB"/>
+        <rect x="125" y="108" width="24" height="8" rx="4" fill="#1D414C" opacity="0.15"/>
+        <!-- Divider -->
+        <line x1="55" y1="126" x2="149" y2="126" stroke="#C3E2DB" stroke-width="1.5"/>
+        <!-- Total -->
+        <rect x="55" y="132" width="40" height="8" rx="4" fill="#1D414C" opacity="0.2"/>
+        <rect x="118" y="130" width="32" height="12" rx="6" fill="#FCB22D"/>
+        <!-- Check mark -->
+        <circle cx="160" cy="55" r="16" fill="#FCB22D" opacity="0.15"/>
+        <circle cx="160" cy="55" r="11" fill="#FCB22D"/>
+        <path d="M155 55l3.5 3.5 6-6" stroke="#1D414C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 3. Transparent Booking -->
+  <section class="promise-row">
+    <div class="promise-text">
+      <div class="promise-number">03 — Transparency</div>
+      <h2>Transparent Booking Experience</h2>
+      <p>You'll always know who you're booking with. Your reservation is made directly with the host, so cancellation policies, payment terms and house rules are set by them, not interpreted by a platform. It's the same experience you'd get booking on their own site.</p>
+    </div>
+    <div class="promise-visual vis-pool">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Eye -->
+        <path d="M100 65C72 65 48 85 38 100c10 15 34 35 62 35s52-20 62-35c-10-15-34-35-62-35z" fill="#1D414C" opacity="0.08"/>
+        <path d="M100 70C76 70 54 87 44 100c10 13 32 30 56 30s46-17 56-30c-10-13-32-30-56-30z" fill="white" opacity="0.8"/>
+        <circle cx="100" cy="100" r="22" fill="#C3E2DB"/>
+        <circle cx="100" cy="100" r="13" fill="#1D414C" opacity="0.2"/>
+        <circle cx="100" cy="100" r="7" fill="#1D414C" opacity="0.4"/>
+        <circle cx="95" cy="95" r="3" fill="white" opacity="0.6"/>
+        <!-- Sparkle accents -->
+        <g fill="#FCB22D">
+          <circle cx="148" cy="72" r="4"/>
+          <circle cx="56" cy="128" r="3"/>
+          <rect x="155" y="77" width="2" height="10" rx="1" transform="rotate(45, 156, 82)"/>
+          <rect x="151" y="81" width="10" height="2" rx="1" transform="rotate(45, 156, 82)"/>
+        </g>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 4. Direct Communication -->
+  <section class="promise-row">
+    <div class="promise-text">
+      <div class="promise-number">04 — Connection</div>
+      <h2>Direct Communication</h2>
+      <p>Before, during, or after your stay, you're in direct contact with your host. No tickets, no call centers. Just a direct line to the person who knows your property best.</p>
+    </div>
+    <div class="promise-visual vis-white">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Chat bubbles -->
+        <rect x="30" y="55" width="100" height="60" rx="14" fill="#C3E2DB"/>
+        <polygon points="55,115 45,135 75,115" fill="#C3E2DB"/>
+        <rect x="42" y="73" width="55" height="6" rx="3" fill="#1D414C" opacity="0.15"/>
+        <rect x="42" y="87" width="40" height="6" rx="3" fill="#1D414C" opacity="0.1"/>
+        <!-- Reply bubble -->
+        <rect x="80" y="105" width="90" height="50" rx="14" fill="#1D414C" opacity="0.1"/>
+        <polygon points="145,155 155,170 135,155" fill="#1D414C" opacity="0.1"/>
+        <rect x="92" y="120" width="50" height="6" rx="3" fill="#1D414C" opacity="0.12"/>
+        <rect x="92" y="134" width="35" height="6" rx="3" fill="#1D414C" opacity="0.08"/>
+        <!-- Connection line -->
+        <circle cx="155" cy="60" r="18" fill="#FCB22D" opacity="0.12"/>
+        <circle cx="155" cy="60" r="11" fill="#FCB22D"/>
+        <path d="M149 60h12M155 54v12" stroke="#1D414C" stroke-width="2" stroke-linecap="round"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- 5. Support -->
+  <section class="promise-row">
+    <div class="promise-text">
+      <div class="promise-number">05 — Backing</div>
+      <h2>Support When You Need It</h2>
+      <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+    </div>
+    <div class="promise-visual vis-pool">
+      <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <!-- Life preserver -->
+        <circle cx="100" cy="100" r="55" fill="#1D414C" opacity="0.08"/>
+        <circle cx="100" cy="100" r="45" fill="white" opacity="0.8"/>
+        <circle cx="100" cy="100" r="30" fill="#1D414C" opacity="0.06"/>
+        <circle cx="100" cy="100" r="20" fill="white" opacity="0.9"/>
+        <!-- Colored segments -->
+        <path d="M100 55a45 45 0 0 1 31.8 13.2l-14.1 14.1a25 25 0 0 0-17.7-7.3V55z" fill="#FCB22D" opacity="0.8"/>
+        <path d="M100 145a45 45 0 0 1-31.8-13.2l14.1-14.1a25 25 0 0 0 17.7 7.3V145z" fill="#FCB22D" opacity="0.8"/>
+        <path d="M55 100a45 45 0 0 1 13.2-31.8l14.1 14.1A25 25 0 0 0 75 100H55z" fill="#C3E2DB"/>
+        <path d="M145 100a45 45 0 0 1-13.2 31.8l-14.1-14.1A25 25 0 0 0 125 100h20z" fill="#C3E2DB"/>
+        <!-- Heart in center -->
+        <path d="M100 110l-7.5-7.5c-3-3-3-7.5 0-10.5 3-3 7.5-3 10.5 0l-3 3 3-3c3-3 7.5-3 10.5 0s3 7.5 0 10.5L100 110z" fill="#FCB22D"/>
+      </svg>
+    </div>
+  </section>
+
+  <section class="commitment">
+    <div class="commitment-inner">
+      <h2>Our Commitment</h2>
+      <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+      <a href="#" class="cta-button">Browse Properties</a>
+    </div>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Savvy Promise — V2: Bold Cards with Numbers</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap');
+
+    :root {
+      --savvy-blue: #1D414C;
+      --savvy-blue-dark: #18343C;
+      --pool: #C3E2DB;
+      --soft-white: #F4F1E9;
+      --sunrise: #FCB22D;
+      --sunrise-dark: #E59603;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--savvy-blue);
+      color: var(--savvy-blue);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Hero: Full-bleed dark with accent line ── */
+    .hero {
+      padding: 120px 48px 100px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    .hero-shield {
+      width: 64px;
+      height: 64px;
+      margin: 0 auto 32px;
+    }
+
+    .hero-shield svg {
+      width: 64px;
+      height: 64px;
+      fill: var(--sunrise);
+    }
+
+    .hero h1 {
+      font-size: 72px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.05;
+      letter-spacing: -2px;
+      margin-bottom: 32px;
+    }
+
+    .hero-line {
+      width: 64px;
+      height: 3px;
+      background: var(--sunrise);
+      margin: 0 auto 32px;
+      border-radius: 2px;
+    }
+
+    .hero p {
+      font-size: 20px;
+      font-weight: 300;
+      color: var(--pool);
+      line-height: 1.7;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    /* ── Cards section on soft-white ── */
+    .cards-section {
+      background: var(--soft-white);
+      padding: 96px 48px;
+      border-radius: 32px 32px 0 0;
+    }
+
+    .cards-grid {
+      max-width: 1120px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: auto auto;
+      gap: 24px;
+    }
+
+    .card {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 44px 36px 40px;
+      position: relative;
+      transition: transform 0.2s ease, box-shadow 0.25s ease;
+      box-shadow: 0 2px 8px rgba(29, 65, 76, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 48px rgba(29, 65, 76, 0.1);
+    }
+
+    /* First two cards span wider */
+    .card:nth-child(1) { grid-column: span 2; }
+    .card:nth-child(2) { grid-column: span 1; }
+    .card:nth-child(3) { grid-column: span 1; }
+    .card:nth-child(4) { grid-column: span 1; }
+    .card:nth-child(5) { grid-column: span 1; }
+
+    .card-number {
+      font-size: 80px;
+      font-weight: 700;
+      color: var(--pool);
+      line-height: 1;
+      margin-bottom: 20px;
+      opacity: 0.6;
+    }
+
+    .card-icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 20px;
+    }
+
+    .card-icon svg {
+      width: 48px;
+      height: 48px;
+    }
+
+    .card h3 {
+      font-size: 26px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-bottom: 16px;
+      letter-spacing: -0.3px;
+    }
+
+    .card p {
+      font-size: 16px;
+      font-weight: 300;
+      line-height: 1.75;
+      color: var(--savvy-blue);
+      opacity: 0.75;
+      flex-grow: 1;
+    }
+
+    .card-accent {
+      width: 40px;
+      height: 3px;
+      background: var(--sunrise);
+      border-radius: 2px;
+      margin-top: 24px;
+    }
+
+    /* Special highlight card */
+    .card.highlight {
+      background: var(--savvy-blue);
+    }
+
+    .card.highlight .card-number { color: var(--savvy-blue-light); opacity: 0.3; }
+    .card.highlight h3 { color: var(--white); }
+    .card.highlight p { color: var(--pool); opacity: 0.8; }
+
+    /* ── Commitment ── */
+    .commitment {
+      background: var(--pool);
+      padding: 96px 48px;
+      text-align: center;
+    }
+
+    .commitment-inner {
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .commitment h2 {
+      font-size: 48px;
+      font-weight: 700;
+      color: var(--savvy-blue);
+      margin-bottom: 24px;
+      letter-spacing: -0.5px;
+    }
+
+    .commitment p {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--savvy-blue);
+      line-height: 1.7;
+      opacity: 0.8;
+      margin-bottom: 40px;
+    }
+
+    .cta-button {
+      display: inline-block;
+      background: var(--savvy-blue);
+      color: var(--white);
+      font-weight: 600;
+      font-size: 17px;
+      padding: 16px 44px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+    }
+
+    .cta-button:hover {
+      background: var(--savvy-blue-dark);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 900px) {
+      .cards-grid { grid-template-columns: 1fr; }
+      .card:nth-child(1) { grid-column: span 1; }
+      .hero h1 { font-size: 44px; letter-spacing: -1px; }
+      .hero { padding: 80px 24px 64px; }
+      .cards-section { padding: 48px 20px; border-radius: 24px 24px 0 0; }
+      .card-number { font-size: 56px; }
+      .commitment h2 { font-size: 32px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-shield">
+        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-1.5 14.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.09-5.09L17 10l-6.5 6.5z"/></svg>
+      </div>
+      <h1>The Savvy Promise</h1>
+      <div class="hero-line"></div>
+      <p>When you book on Savvy, you're not booking through a middleman — you're booking directly with trusted, professional property managers. That means real transparency, no traveler booking fees and no platform standing between you and a great hospitality experience.</p>
+    </div>
+  </section>
+
+  <section class="cards-section">
+    <div class="cards-grid">
+
+      <div class="card">
+        <div class="card-number">01</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M24 4L6 14v10c0 11.1 7.68 21.48 18 24 10.32-2.52 18-12.9 18-24V14L24 4zm-3 29l-7-7 2.82-2.82L21 27.34l10.18-10.18L34 20l-13 13z" fill="#1D414C"/></svg>
+        </div>
+        <h3>Vetted, Professional Hosts</h3>
+        <p>Every property on Savvy is managed by a verified, professional property manager — not a hobbyist host. These are operators who run hospitality as a business, with dedicated teams, established processes and properties maintained to a professional standard. Before listing on Savvy, every host agrees to our code of conduct, committing to accurate listings, fair pricing, and a guest experience they stand behind.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card highlight">
+        <div class="card-number">02</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M23.6 21.8c-4.54-1.18-6-2.4-6-4.3 0-2.18 2.02-3.7 5.4-3.7 3.56 0 4.88 1.7 5 4.2h4.42c-.14-3.44-2.24-6.6-6.42-7.62V6h-6v4.32C16.12 11.16 13 13.68 13 17.54c0 4.62 3.82 6.92 9.4 8.26 5 1.2 6 2.96 6 4.82 0 1.38-.98 3.58-5.4 3.58-4.12 0-5.74-1.84-5.96-4.2h-4.4c.24 4.38 3.52 6.84 7.36 7.66V42h6v-4.3c3.9-.74 7-3 7-7.1 0-5.68-4.86-7.62-9.4-8.8z" fill="#FCB22D"/></svg>
+        </div>
+        <h3>Accurate Pricing & Availability</h3>
+        <p>Rates, fees, and availability are pulled directly from the host's system in real time. What you see reflects what the host offers — no outdated pricing or unexpected platform markups or booking fees.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-number">03</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M24 9C14 9 5.46 15.22 2 24c3.46 8.78 12 15 22 15s18.54-6.22 22-15C42.54 15.22 34 9 24 9zm0 25c-5.52 0-10-4.48-10-10s4.48-10 10-10 10 4.48 10 10-4.48 10-10 10zm0-16c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6z" fill="#1D414C"/></svg>
+        </div>
+        <h3>Transparent Booking Experience</h3>
+        <p>You'll always know who you're booking with. Your reservation is made directly with the host, so cancellation policies, payment terms and house rules are set by them, not interpreted by a platform. It's the same experience you'd get booking on their own site.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-number">04</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M40 4H8c-2.2 0-3.98 1.8-3.98 4L4 44l8-8h28c2.2 0 4-1.8 4-4V8c0-2.2-1.8-4-4-4zM12 18h24v4H12v-4zm16 10H12v-4h16v4zm8-12H12v-4h24v4z" fill="#1D414C"/></svg>
+        </div>
+        <h3>Direct Communication</h3>
+        <p>Before, during, or after your stay, you're in direct contact with your host. No tickets, no call centers. Just a direct line to the person who knows your property best.</p>
+        <div class="card-accent"></div>
+      </div>
+
+      <div class="card">
+        <div class="card-number">05</div>
+        <div class="card-icon">
+          <svg viewBox="0 0 48 48" fill="none"><path d="M24 4C12.96 4 4 12.96 4 24s8.96 20 20 20 20-8.96 20-20S35.04 4 24 4zm-4 30l-10-10 2.82-2.82L20 28.34l15.18-15.18L38 16 20 34z" fill="#1D414C"/></svg>
+        </div>
+        <h3>Support When You Need It</h3>
+        <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+        <div class="card-accent"></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="commitment">
+    <div class="commitment-inner">
+      <h2>Our Commitment</h2>
+      <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+      <a href="#" class="cta-button">Browse Properties</a>
+    </div>
+  </section>
+
+</body>
+</html>
