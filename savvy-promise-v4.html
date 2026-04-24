@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Savvy Promise</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,700;1,9..40,300&display=swap');
+
+    :root {
+      --savvy-blue: #1D414C;
+      --savvy-blue-dark: #18343C;
+      --savvy-blue-light: #37788A;
+      --pool: #C3E2DB;
+      --soft-white: #F4F1E9;
+      --sunrise: #FCB22D;
+      --sunrise-dark: #E59603;
+      --fog: #eff0ed;
+      --white: #FFFFFF;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background-color: var(--white);
+      color: var(--savvy-blue);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Navbar ── */
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px 48px;
+      background: var(--white);
+      border-bottom: 1px solid rgba(29, 65, 76, 0.08);
+    }
+
+    .navbar-logo svg {
+      height: 32px;
+      width: auto;
+      display: block;
+    }
+
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .navbar-link {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--savvy-blue);
+      text-decoration: none;
+      transition: color 0.15s ease;
+    }
+
+    .navbar-link:hover {
+      color: var(--savvy-blue-light);
+    }
+
+    .navbar-icons {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .navbar-icon-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(29, 65, 76, 0.12);
+      background: transparent;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .navbar-icon-btn:hover {
+      background: var(--fog);
+    }
+
+    .navbar-icon-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--savvy-blue);
+    }
+
+    /* ── Hero (v3 design, redesign sizing) ── */
+    .hero {
+      background: linear-gradient(170deg, var(--savvy-blue) 0%, var(--savvy-blue-dark) 100%);
+      padding: 96px 48px 80px;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-icon-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+
+    .hero-icon-row .line {
+      width: 48px;
+      height: 2px;
+      background: var(--sunrise);
+      opacity: 0.5;
+    }
+
+    .hero-icon-row svg {
+      width: 48px;
+      height: 48px;
+      fill: var(--sunrise);
+    }
+
+    .hero h1 {
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -0.5px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-weight: 300;
+      font-size: 22px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--pool);
+      margin-bottom: 12px;
+    }
+
+    .hero-body {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--pool);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto;
+    }
+
+    /* ── Body: Promise Sections (from Figma) ── */
+    .promises-section {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 48px 48px 0;
+    }
+
+    .promise-list {
+      display: flex;
+      flex-direction: column;
+      gap: 38px;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: rgba(29, 65, 76, 0.12);
+    }
+
+    .promise-item {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .promise-item-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .promise-item-header .promise-icon {
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .promise-item-header .promise-icon svg {
+      width: 100%;
+      height: 100%;
+      fill: var(--savvy-blue);
+    }
+
+    .promise-item-header h3 {
+      font-size: 32px;
+      font-weight: 500;
+      color: var(--savvy-blue);
+      line-height: 1.375;
+    }
+
+    .promise-item p {
+      font-size: 16px;
+      font-weight: 400;
+      color: var(--savvy-blue);
+      line-height: 1.5;
+    }
+
+    /* ── Our Commitment ── */
+    .commitment-section {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 48px 96px;
+      text-align: center;
+    }
+
+    .commitment-section h2 {
+      font-size: 48px;
+      font-weight: 500;
+      color: var(--savvy-blue);
+      line-height: 1.25;
+      letter-spacing: -0.5px;
+      margin-bottom: 20px;
+    }
+
+    .commitment-section p {
+      font-size: 18px;
+      font-weight: 300;
+      color: var(--savvy-blue);
+      line-height: 1.7;
+      max-width: 640px;
+      margin: 0 auto 36px;
+      opacity: 0.8;
+    }
+
+    .commitment-ctas {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .cta-button {
+      display: inline-block;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 600;
+      font-size: 16px;
+      padding: 14px 36px;
+      border-radius: 100px;
+      text-decoration: none;
+      transition: background 0.2s ease, transform 0.15s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .cta-primary {
+      background: var(--sunrise);
+      color: var(--savvy-blue);
+    }
+
+    .cta-primary:hover {
+      background: var(--sunrise-dark);
+    }
+
+    .cta-secondary {
+      background: transparent;
+      color: var(--savvy-blue);
+      border: 1px solid rgba(29, 65, 76, 0.2);
+    }
+
+    .cta-secondary:hover {
+      border-color: rgba(29, 65, 76, 0.4);
+      background: rgba(29, 65, 76, 0.03);
+    }
+
+    /* ── Footer ── */
+    .footer-wrapper {
+      padding: 48px;
+    }
+
+    .footer {
+      background: var(--savvy-blue);
+      border-radius: 16px;
+      padding: 48px;
+      display: flex;
+      flex-direction: column;
+      gap: 78px;
+    }
+
+    .footer-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .footer-logo svg {
+      height: 39px;
+      width: auto;
+    }
+
+    .footer-logo .tagline {
+      font-size: 14px;
+      font-weight: 300;
+      color: var(--white);
+      margin-left: 18px;
+      margin-top: 12px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 80px;
+    }
+
+    .footer-col h4 {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--sunrise);
+      margin-bottom: 10px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .footer-col ul li a {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--white);
+      text-decoration: none;
+      transition: opacity 0.15s ease;
+    }
+
+    .footer-col ul li a:hover {
+      opacity: 0.7;
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+    }
+
+    .footer-social-label {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--sunrise);
+      margin-bottom: 12px;
+    }
+
+    .footer-social-icons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .footer-social-icons a {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border-color 0.15s ease;
+    }
+
+    .footer-social-icons a:hover {
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-social-icons a svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--white);
+    }
+
+    .footer-newsletter {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .footer-newsletter label {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--sunrise);
+      white-space: nowrap;
+    }
+
+    .footer-newsletter input {
+      width: 320px;
+      height: 44px;
+      border: 1px solid var(--soft-white);
+      border-radius: 22px;
+      background: transparent;
+      padding: 0 25px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--white);
+      outline: none;
+    }
+
+    .footer-newsletter input::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .footer-copyright {
+      text-align: right;
+      padding-top: 12px;
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--savvy-blue);
+    }
+
+    .footer-copyright a {
+      color: var(--savvy-blue);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 768px) {
+      .navbar { padding: 16px 20px; }
+      .navbar-link { display: none; }
+
+      .hero { padding: 64px 24px 56px; }
+      .hero h1 { font-size: 36px; }
+      .hero h1 span { font-size: 16px; letter-spacing: 2px; }
+      .hero-body { font-size: 16px; }
+      .hero-icon-row svg { width: 36px; height: 36px; }
+      .hero-icon-row .line { width: 32px; }
+
+      .promises-section { padding: 48px 20px; }
+      .promise-intro h2 { font-size: 32px; }
+      .promise-intro .shield-icon { width: 48px; height: 48px; }
+      .promise-item-header h3 { font-size: 24px; }
+
+      .commitment-section { padding: 24px 20px 56px; }
+      .commitment-section h2 { font-size: 32px; }
+
+      .footer-wrapper { padding: 20px; }
+      .footer { padding: 32px 24px; gap: 40px; }
+      .footer-top { flex-direction: column; gap: 32px; }
+      .footer-links { flex-direction: column; gap: 24px; }
+      .footer-bottom { flex-direction: column; gap: 24px; align-items: flex-start; }
+      .footer-newsletter { flex-direction: column; align-items: flex-start; }
+      .footer-newsletter input { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <a href="/" class="navbar-logo">
+      <svg viewBox="0 0 512 142" xmlns="http://www.w3.org/2000/svg">
+        <path d="M53.6 103.2c15.2 0 27.2-5.6 27.2-19.2 0-28-52.8-16-52.8-32.8 0-7.2 6.4-11.2 16-11.2 10.4 0 18.4 4.8 19.2 15.2h16C78.4 37.6 65.6 26 44 26 28.8 26 12 34.4 12 50.4c0 28 52.8 15.2 52.8 33.6 0 8-8 13.6-19.2 13.6-12 0-22.4-6.4-23.2-18.4H6.4C7.2 96 22.4 103.2 53.6 103.2z" fill="#1D414C"/>
+        <path d="M139.2 52h-16l-16 36.8L91.2 52h-16l24 49.6h16L139.2 52z" fill="#1D414C"/>
+        <path d="M218.4 52h-16l-16 36.8L170.4 52h-16l24 49.6h16L218.4 52z" fill="#1D414C"/>
+        <path d="M264 52h-16l-24 49.6h16l4.8-11.2h22.4l4.8 11.2h16L264 52zm-15.2 28l7.2-16.8 7.2 16.8h-14.4z" fill="#1D414C"/>
+        <path d="M340 52h-16l-20 27.2L284 52h-16l28 36v13.6h16V88L340 52z" fill="#1D414C"/>
+      </svg>
+    </a>
+    <div class="navbar-right">
+      <a href="/list" class="navbar-link">List your Properties</a>
+      <div class="navbar-icons">
+        <button class="navbar-icon-btn" aria-label="Menu">
+          <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
+        </button>
+        <button class="navbar-icon-btn" aria-label="Account">
+          <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero (v3 design + redesign sizing) -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-icon-row">
+        <div class="line"></div>
+        <svg viewBox="0 0 24 24"><path d="M12 2L3 7v5c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-9-5zm-1.5 14.5l-3.5-3.5 1.41-1.41L10.5 13.67l5.09-5.09L17 10l-6.5 6.5z"/></svg>
+        <div class="line"></div>
+      </div>
+      <h1>
+        <span>What We Stand For</span>
+        The Savvy Promise
+      </h1>
+      <p class="hero-body">When you book on Savvy, you're not booking through a middleman — you're booking directly with trusted, professional property managers. That means real transparency, no traveler booking fees and no platform standing between you and a great hospitality experience.</p>
+    </div>
+  </section>
+
+  <!-- Body: Promise Sections (from Figma) -->
+  <section class="promises-section">
+    <div class="promise-list">
+
+      <!-- 1: Vetted, Professional Hosts -->
+      <div class="promise-item">
+        <div class="promise-item-header">
+          <div class="promise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M310 416C312.9 404.9 316.7 394.2 321.4 384L320 384L256 384C196.1 384 145.9 425.1 131.9 480.6C90 439.9 64 383 64 320C64 196.3 164.3 96 288 96C395.3 96 485.1 171.5 506.9 272.3C518.4 272.9 529.6 274.6 540.4 277.2C520.1 156.2 414.8 64 288 64C146.6 64 32 178.6 32 320C32 461.4 146.6 576 288 576C304.7 576 321 574.4 336.8 571.4C330.5 562.1 325 552.1 320.4 541.7C309.8 543.2 299 544 288 544C240.5 544 196.5 529.2 160.3 504.1C164.3 454.8 205.6 416 256 416L310 416zM288 304C261.5 304 240 282.5 240 256C240 229.5 261.5 208 288 208C314.5 208 336 229.5 336 256C336 282.5 314.5 304 288 304zM208 256C208 300.2 243.8 336 288 336C332.2 336 368 300.2 368 256C368 211.8 332.2 176 288 176C243.8 176 208 211.8 208 256zM496 352C557.9 352 608 402.1 608 464C608 525.9 557.9 576 496 576C434.1 576 384 525.9 384 464C384 402.1 434.1 352 496 352zM496 608C575.5 608 640 543.5 640 464C640 384.5 575.5 320 496 320C416.5 320 352 384.5 352 464C352 543.5 416.5 608 496 608zM553.4 403.1C546.3 397.9 536.2 399.5 531 406.6L478 479.5L451.2 452.7C445 446.5 434.8 446.5 428.6 452.7C422.4 458.9 422.4 469.1 428.6 475.3L468.6 515.3C471.9 518.6 476.5 520.3 481.2 519.9C485.9 519.5 490.1 517.1 492.9 513.4L556.9 425.4C562.1 418.3 560.5 408.2 553.4 403z"/></svg>
+          </div>
+          <h3>Vetted, Professional Hosts</h3>
+        </div>
+        <p>Every property on Savvy is managed by a verified, professional property manager — not a hobbyist host. These are operators who run hospitality as a business, with dedicated teams, established processes and properties maintained to a professional standard. Before listing on Savvy, every host agrees to our code of conduct, committing to accurate listings, fair pricing, and a guest experience they stand behind.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 2: Accurate Pricing & Availability -->
+      <div class="promise-item">
+        <div class="promise-item-header">
+          <div class="promise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M128.1 160C128.1 142.3 142.4 128 160.1 128L316.2 128C324.7 128 332.8 131.4 338.8 137.4L530.8 329.4C543.3 341.9 543.3 362.2 530.8 374.6L374.7 530.7C362.2 543.2 341.9 543.2 329.4 530.7L137.4 338.7C131.4 332.7 128 324.6 128 316.1L128.1 160zM160.1 96C124.8 96 96.1 124.7 96.1 160L96.1 316.1C96.1 333.1 102.8 349.3 114.8 361.4L306.8 553.4C331.8 578.4 372.3 578.4 397.3 553.4L553.5 397.3C578.5 372.3 578.5 331.8 553.5 306.8L361.5 114.8C349.5 102.8 333.2 96.1 316.2 96.1L160.1 96zM208.1 232C221.4 232 232.1 221.3 232.1 208C232.1 194.7 221.4 184 208.1 184C194.8 184 184.1 194.7 184.1 208C184.1 221.3 194.8 232 208.1 232z"/></svg>
+          </div>
+          <h3>Accurate Pricing &amp; Availability</h3>
+        </div>
+        <p>Rates, fees, and availability are pulled directly from the host's system in real time. What you see reflects what the host offers — no outdated pricing or unexpected platform markups or booking fees.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 3: Transparent Booking Experience -->
+      <div class="promise-item">
+        <div class="promise-item-header">
+          <div class="promise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M320 128C179.2 128 90.7 256 64 320C90.7 384 179.2 512 320 512C460.8 512 549.3 384 576 320C549.3 256 460.8 128 320 128zM127.4 176.6C174.5 132.8 239.2 96 320 96C400.8 96 465.5 132.8 512.6 176.6C559.4 220.1 590.7 272 605.6 307.7C608.9 315.6 608.9 324.4 605.6 332.3C590.7 368 559.4 420 512.6 463.4C465.5 507.1 400.8 544 320 544C239.2 544 174.5 507.2 127.4 463.4C80.6 419.9 49.3 368 34.4 332.3C31.1 324.4 31.1 315.6 34.4 307.7C49.3 272 80.6 220 127.4 176.6zM320 416C373 416 416 373 416 320C416 276.7 387.3 240.1 347.9 228.1C350.6 236.9 352 246.3 352 256C352 309 309 352 256 352C246.3 352 236.9 350.6 228.1 347.9C240 387.3 276.7 416 320 416zM192.2 327.8C192 325.2 192 322.6 192 320C192 307.8 193.7 296.1 196.9 285C197.2 284.1 197.4 283.2 197.7 282.3C210.1 241.9 242 210.1 282.4 197.6C294.3 193.9 307 192 320.1 192C322.6 192 325.1 192.1 327.5 192.2L327.9 192.2C395 196.2 448.1 251.9 448.1 320C448.1 390.7 390.8 448 320.1 448C252 448 196.3 394.8 192.3 327.8zM224.3 311.7C233.6 317 244.4 320.1 255.9 320.1C291.2 320.1 319.9 291.4 319.9 256.1C319.9 244.6 316.9 233.8 311.5 224.5C265.1 228.5 228.2 265.4 224.2 311.8z"/></svg>
+          </div>
+          <h3>Transparent Booking Experience</h3>
+        </div>
+        <p>You'll always know who you're booking with. Your reservation is made directly with the host, so cancellation policies, payment terms and house rules are set by them, not interpreted by a platform. It's the same experience you'd get booking on their own site.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 4: Direct Communication -->
+      <div class="promise-item">
+        <div class="promise-item-header">
+          <div class="promise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M94.6 317.6C98.4 307.5 96.9 296 90.5 287.3C73.6 264.4 64 237.1 64 208C64 131 133 64 224 64C315 64 384 131 384 208C384 285 315 352 224 352C206 352 188.8 349.3 172.8 344.5C166 342.4 158.7 342.7 152.1 345.2L72.6 375.5L94.6 317.7zM32 208C32 244.4 44 278.2 64.7 306.2L33.3 388.5C32.4 390.8 32 393.2 32 395.7C32 406.9 41.1 416 52.3 416C54.8 416 57.2 415.5 59.5 414.7L163.5 375.1C182.5 380.9 202.9 384 224.1 384C330.1 384 416.1 305.2 416.1 208C416.1 110.8 330 32 224 32C118 32 32 110.8 32 208zM416 576C437.2 576 457.5 572.9 476.6 567.1L580.6 606.7C582.9 607.6 585.4 608 587.8 608C599 608 608.1 598.9 608.1 587.7C608.1 585.2 607.6 582.8 606.8 580.5L575.5 498.2C596.1 470.1 608.2 436.3 608.2 400C608.2 317.6 546.5 248.5 463.2 229.3C462.1 240.1 460.3 250.6 457.6 260.8C527.4 277.5 576.2 335.2 576.2 400C576.2 429.1 566.6 456.4 549.7 479.3C543.3 488.1 541.7 499.5 545.6 509.6L567.6 567.4L488.1 537.1C481.5 534.6 474.2 534.3 467.4 536.4C451.4 541.3 434.2 543.9 416.2 543.9C337.1 543.9 274.6 493.2 259.6 429.4C249 430.9 238.2 431.7 227.3 431.8C243.7 513.7 322 575.8 416.1 575.8z"/></svg>
+          </div>
+          <h3>Direct Communication</h3>
+        </div>
+        <p>Before, during, or after your stay, you're in direct contact with your host. No tickets, no call centers. Just a direct line to the person who knows your property best.</p>
+      </div>
+
+      <div class="divider"></div>
+
+      <!-- 5: Support When You Need It -->
+      <div class="promise-item">
+        <div class="promise-item-header">
+          <div class="promise-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><path d="M128.2 280.3C132.2 177.8 216.5 96 320 96C423.5 96 507.8 177.8 511.8 280.3C494.8 265.2 472.5 256 448 256L432 256C405.5 256 384 277.5 384 304L384 400C384 426.5 405.5 448 432 448L448 448C472.6 448 495 438.8 512 423.6L512 464.1C512 508.3 476.2 544.1 432 544.1L397.3 544.1C399.1 539.1 400 533.7 400 528.1C400 501.6 378.5 480.1 352 480.1L288 480.1C261.5 480.1 240 501.6 240 528.1C240 554.6 261.5 576.1 288 576.1C312 576.1 360 576.1 431.9 576.2C493.8 576.2 544 526.1 544 464.2L544 288C544 164.3 443.7 64 320 64C196.3 64 96 164.3 96 288L96 352C96 405 139 448 192 448L208 448C234.5 448 256 426.5 256 400L256 304C256 277.5 234.5 256 208 256L192 256C167.5 256 145.1 265.2 128.2 280.3zM336 544L288 544C279.2 544 272 536.8 272 528C272 519.2 279.2 512 288 512L352 512C360.8 512 368 519.2 368 528C368 536.8 360.8 544 352 544L336 544zM448 288C483.3 288 512 316.7 512 352C512 387.3 483.3 416 448 416L432 416C423.2 416 416 408.8 416 400L416 304C416 295.2 423.2 288 432 288L448 288zM128 352C128 316.7 156.7 288 192 288L208 288C216.8 288 224 295.2 224 304L224 400C224 408.8 216.8 416 208 416L192 416C156.7 416 128 387.3 128 352z"/></svg>
+          </div>
+          <h3>Support When You Need It</h3>
+        </div>
+        <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+      </div>
+
+      <div class="divider"></div>
+    </div>
+  </section>
+
+  <!-- Our Commitment -->
+  <section class="commitment-section">
+    <h2>Our Commitment</h2>
+    <p>While your reservation is made directly with the host, Savvy is always in your corner. If you have trouble reaching your host or have concerns about your stay, reach out and we'll help you get in touch with them to get it resolved.</p>
+    <div class="commitment-ctas">
+      <a href="#" class="cta-button cta-primary">Browse Properties</a>
+      <a href="#" class="cta-button cta-secondary">Contact Support</a>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-wrapper">
+    <div class="footer">
+      <div class="footer-top">
+        <div class="footer-logo">
+          <svg viewBox="0 0 512 142" xmlns="http://www.w3.org/2000/svg">
+            <path d="M53.6 103.2c15.2 0 27.2-5.6 27.2-19.2 0-28-52.8-16-52.8-32.8 0-7.2 6.4-11.2 16-11.2 10.4 0 18.4 4.8 19.2 15.2h16C78.4 37.6 65.6 26 44 26 28.8 26 12 34.4 12 50.4c0 28 52.8 15.2 52.8 33.6 0 8-8 13.6-19.2 13.6-12 0-22.4-6.4-23.2-18.4H6.4C7.2 96 22.4 103.2 53.6 103.2z" fill="white"/>
+            <path d="M139.2 52h-16l-16 36.8L91.2 52h-16l24 49.6h16L139.2 52z" fill="white"/>
+            <path d="M218.4 52h-16l-16 36.8L170.4 52h-16l24 49.6h16L218.4 52z" fill="white"/>
+            <path d="M264 52h-16l-24 49.6h16l4.8-11.2h22.4l4.8 11.2h16L264 52zm-15.2 28l7.2-16.8 7.2 16.8h-14.4z" fill="white"/>
+            <path d="M340 52h-16l-20 27.2L284 52h-16l28 36v13.6h16V88L340 52z" fill="white"/>
+          </svg>
+          <span class="tagline">Stay smarter.</span>
+        </div>
+        <div class="footer-links">
+          <div class="footer-col">
+            <h4>Company</h4>
+            <ul>
+              <li><a href="#">About us</a></li>
+              <li><a href="#">Journal</a></li>
+              <li><a href="#">Press</a></li>
+              <li><a href="#">Careers</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>Support</h4>
+            <ul>
+              <li><a href="#">Help center</a></li>
+              <li><a href="#">Accessibility</a></li>
+              <li><a href="#">Gift cards</a></li>
+            </ul>
+          </div>
+          <div class="footer-col">
+            <h4>For Hosts</h4>
+            <ul>
+              <li><a href="#">List your properties</a></li>
+              <li><a href="#">Integrations</a></li>
+              <li><a href="#">Host support</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div>
+          <p class="footer-social-label">Stay in touch</p>
+          <div class="footer-social-icons">
+            <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+            <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5" fill="none" stroke="white" stroke-width="2"/><circle cx="12" cy="12" r="5" fill="none" stroke="white" stroke-width="2"/><circle cx="17.5" cy="6.5" r="1.5"/></svg></a>
+            <a href="#" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1 0-5.78 2.92 2.92 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 3 15.57 6.33 6.33 0 0 0 9.37 22a6.33 6.33 0 0 0 6.38-6.22V9.4a8.16 8.16 0 0 0 4.84 1.58V7.53a4.83 4.83 0 0 1-1-.84z"/></svg></a>
+            <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.08 3.15 9.42 7.6 11.18-.1-.95-.2-2.4.04-3.44.22-.93 1.4-5.93 1.4-5.93s-.36-.72-.36-1.78c0-1.67.97-2.92 2.17-2.92 1.02 0 1.52.77 1.52 1.69 0 1.03-.66 2.57-.99 3.99-.28 1.19.6 2.16 1.77 2.16 2.12 0 3.76-2.24 3.76-5.47 0-2.86-2.06-4.86-5-4.86-3.4 0-5.4 2.55-5.4 5.19 0 1.03.39 2.13.89 2.73.1.12.11.22.08.34-.09.37-.29 1.19-.33 1.36-.05.22-.17.27-.4.16-1.49-.69-2.42-2.87-2.42-4.62 0-3.76 2.73-7.21 7.88-7.21 4.14 0 7.35 2.95 7.35 6.88 0 4.11-2.59 7.42-6.19 7.42-1.21 0-2.35-.63-2.74-1.37l-.74 2.84c-.27 1.04-1 2.35-1.49 3.15C9.57 23.81 10.75 24 12 24c6.63 0 12-5.37 12-12S18.63 0 12 0z"/></svg></a>
+            <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.34V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"/></svg></a>
+            <a href="#" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.88.55 9.38.55 9.38.55s7.5 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81zM9.55 15.57V8.43L15.82 12l-6.27 3.57z"/></svg></a>
+          </div>
+        </div>
+        <div class="footer-newsletter">
+          <label>Sign up for our newsletter:</label>
+          <input type="email" placeholder="name@email.com">
+        </div>
+      </div>
+    </div>
+    <p class="footer-copyright">&copy; 2024 finderco, LLC all rights reserved &bull; <a href="#">Privacy</a> &bull; <a href="#">Terms</a> &bull; <a href="#">Site Map</a></p>
+  </footer>
+
+</body>
+</html>
